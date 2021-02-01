@@ -1,14 +1,10 @@
-﻿using Newtonsoft.Json;
-using OpenAPI.Models;
-using Sample.Authentication.Server.Models;
+﻿using Sample.Authentication.Server.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sample.Authentication.Server.Services
 {

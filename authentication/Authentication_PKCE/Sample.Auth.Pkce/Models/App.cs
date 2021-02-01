@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sample.Auth.Pkce.Models
+﻿namespace Sample.Auth.Pkce.Models
 {
     public class App
     {
         public string AppName { get; set; }
 
         public string AppKey { get; set; }
+
+        public string AccountKey { get; set; }
 
         public string CodeVerifier { get; set; }
 

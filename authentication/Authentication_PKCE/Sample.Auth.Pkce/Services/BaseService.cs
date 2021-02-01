@@ -23,7 +23,7 @@ namespace Sample.Auth.Pkce.Services
 
 
         /// <summary>
-        /// Send out token request
+        /// Send the HTTPS request
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -44,9 +44,8 @@ namespace Sample.Auth.Pkce.Services
             }
             catch (Exception ex)
             {
-                throw new HttpRequestException(ex.Message + content, ex);
+                throw new HttpRequestException($"Error: {ex.Message} Response: {content}", ex);
             }
         }
     }
-
 }

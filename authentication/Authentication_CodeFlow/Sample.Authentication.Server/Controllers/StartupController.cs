@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OpenAPI.Models;
-using System.Web.Http;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using Sample.Authentication.Server.Models;
 using Sample.Authentication.Server.Services;
+using Sample.Authentication.Server.Models;
 
 namespace Sample.Authentication.Server.Controllers
 {
@@ -121,7 +112,7 @@ namespace Sample.Authentication.Server.Controllers
         [Route("app")]
         public App GetApp()
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "App.json");
+            string path = Path.Combine(AppContext.BaseDirectory, "App.json");
             var content = System.IO.File.ReadAllText(path);
             return JsonConvert.DeserializeObject<App>(content);
         }

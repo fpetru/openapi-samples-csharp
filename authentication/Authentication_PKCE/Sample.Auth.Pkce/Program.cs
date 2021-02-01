@@ -5,11 +5,6 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace Sample.Auth.Pkce
 {
@@ -21,25 +16,44 @@ namespace Sample.Auth.Pkce
             {
                 var app = GetApp();
                 var authService = new PkceAuthService();
-                var clientService = new ClientService();
 
                 // Open Listener for Redirect
                 var listener = BeginListening(app);
 
-                // Get token and call API
+                // Getting first token 
                 Console.WriteLine("Getting Token... ");
                 var token = GoLogin(app, listener);
-                var client = new ClientService().GetClient(app.OpenApiBaseUrl, token.AccessToken, token.TokenType);
-                Console.WriteLine("Token: ");
-                Console.WriteLine(JsonConvert.SerializeObject(new { Token = token, Client = client }, Formatting.Indented));
-                Console.WriteLine("================================ ");
 
-                // Refhresh token and call api
+                // Call APIs
+                var clientService = new ClientService(app.OpenApiBaseUrl, token.AccessToken, token.TokenType);
+
+                // get Client details
+                clientService.WriteFile(clientService.GetClient());
+                
+                // get user details
+                clientService.WriteFile(clientService.GetUser());
+                
+                // get instruments
+                clientService.WriteFile(clientService.GetInstruments("DKK", "FxSpot"));
+
+                // place an order
+                Order placedOrder = new Order { 
+                    Uic = 2, AccountKey = app.AccountKey, BuySell = "Buy", 
+                    AssetType = "FxSpot", Amount = 100000, OrderPrice = 7, 
+                    OrderType = "Limit", OrderRelation = "StandAlone", 
+                    ManualOrder = true, 
+                    OrderDuration = new classOrderDuration() { DurationType = "GoodTillCancel"} };
+                clientService.WriteFile(clientService.PlaceOrder(placedOrder));
+
+                // retrieve all orders
+                clientService.WriteFile(clientService.GetOrders());
+
+                // Refresh token and call api
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Refreshing Token... ");
                 var newToken = RefreshToken(app, token.RefreshToken, listener);
                 client = new ClientService().GetClient(app.OpenApiBaseUrl, token.AccessToken, token.TokenType);
-                Console.WriteLine("New Token: ");
+                Console.WriteLine("Refresh token: ");
                 Console.WriteLine(JsonConvert.SerializeObject(new { Token = newToken, Client = client }, Formatting.Indented));
                 Console.WriteLine("Demo Done.");
                 Console.WriteLine("================================ ");

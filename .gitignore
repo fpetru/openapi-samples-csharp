@@ -358,3 +358,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Local settings
+authentication/Authentication_PKCE/Sample.Auth.Pkce/App.settings.txt

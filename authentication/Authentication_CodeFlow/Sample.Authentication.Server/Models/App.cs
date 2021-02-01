@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OpenAPI.Models
+﻿namespace Sample.Authentication.Server.Models
 {
     public class App
     {
