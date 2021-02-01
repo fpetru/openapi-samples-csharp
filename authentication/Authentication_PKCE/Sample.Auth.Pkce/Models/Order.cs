@@ -1,4 +1,4 @@
-﻿namespace Sample.Auth.Pkce2.Models
+﻿namespace Sample.Auth.Pkce.Models
 {
     public class classOrderDuration
     {

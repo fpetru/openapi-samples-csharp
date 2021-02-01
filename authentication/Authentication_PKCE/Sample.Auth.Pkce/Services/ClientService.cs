@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.IO;
 using Newtonsoft.Json;
 using System.Text;
-using Sample.Auth.Pkce2.Models;
+using Sample.Auth.Pkce.Models;
 
 namespace Sample.Auth.Pkce.Services
 {

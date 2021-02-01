@@ -21,22 +21,26 @@ namespace Sample.Auth.Pkce
                 var listener = BeginListening(app);
 
                 // Getting first token 
-                Console.WriteLine("Getting Token... ");
+                Console.WriteLine("Getting the initial token... ");
                 var token = GoLogin(app, listener);
 
                 // Call APIs
                 var clientService = new ClientService(app.OpenApiBaseUrl, token.AccessToken, token.TokenType);
 
                 // get Client details
+                Console.WriteLine("API call: getting client details... ");
                 clientService.WriteFile(clientService.GetClient());
-                
+
                 // get user details
+                Console.WriteLine("API call: getting user details... ");
                 clientService.WriteFile(clientService.GetUser());
-                
+
                 // get instruments
+                Console.WriteLine("API call: list instruments... ");
                 clientService.WriteFile(clientService.GetInstruments("DKK", "FxSpot"));
 
                 // place an order
+                Console.WriteLine("API call: place an order... ");
                 Order placedOrder = new Order { 
                     Uic = 2, AccountKey = app.AccountKey, BuySell = "Buy", 
                     AssetType = "FxSpot", Amount = 100000, OrderPrice = 7, 
@@ -46,16 +50,15 @@ namespace Sample.Auth.Pkce
                 clientService.WriteFile(clientService.PlaceOrder(placedOrder));
 
                 // retrieve all orders
+                Console.WriteLine("API call: retrieve all available orders from the main account... ");
                 clientService.WriteFile(clientService.GetOrders());
 
                 // Refresh token and call api
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Refreshing Token... ");
+                Console.WriteLine("Refreshing token... ");
                 var newToken = RefreshToken(app, token.RefreshToken, listener);
-                client = new ClientService().GetClient(app.OpenApiBaseUrl, token.AccessToken, token.TokenType);
-                Console.WriteLine("Refresh token: ");
-                Console.WriteLine(JsonConvert.SerializeObject(new { Token = newToken, Client = client }, Formatting.Indented));
-                Console.WriteLine("Demo Done.");
+                Console.WriteLine("Token has been refreshed and the new value is: ");
+                Console.WriteLine(JsonConvert.SerializeObject(new { Token = newToken }, Formatting.Indented));
+                Console.WriteLine("Demo is complete.");
                 Console.WriteLine("================================ ");
             }
             catch (Exception ex)

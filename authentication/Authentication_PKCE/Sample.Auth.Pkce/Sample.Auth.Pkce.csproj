@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\App.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Services\RandomStringBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App.settings.txt" />
     <Content Include="LICENSE.txt" />
     <None Include="App.config" />
     <Content Include="App.json">
