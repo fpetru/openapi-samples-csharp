@@ -39,11 +39,15 @@ namespace Sample.Auth.Pkce
                 Console.WriteLine("API call: list instruments... ");
                 clientService.WriteFile(clientService.GetInstruments("DKK", "FxSpot"));
 
-                // place an order
-                Console.WriteLine("API call: place an order... ");
+                // place an order for the next instrument
+                //  "AssetType": "FxSpot", "CurrencyCode": "ZAR", "Description": "Danish Krone/South African Rand",
+                //  "ExchangeId": "SBFX", "GroupId": 33234, "Identifier": 9445, "SummaryType": "Instrument",
+                //  "Symbol": "DKKZAR", "TradableAs": ["FxSpot","FxForwards","FxSwap"]
+                //  Price set following: https://www.marketwatch.com/investing/currency/DKKZAR
+                Console.WriteLine("API call: place an order for DKKZAR instrument... ");
                 Order placedOrder = new Order { 
-                    Uic = 2, AccountKey = app.AccountKey, BuySell = "Buy", 
-                    AssetType = "FxSpot", Amount = 100000, OrderPrice = 7, 
+                    Uic = 9445, AccountKey = app.AccountKey, BuySell = "Buy", 
+                    AssetType = "FxSpot", Amount = 100000, OrderPrice = 2.45M, 
                     OrderType = "Limit", OrderRelation = "StandAlone", 
                     ManualOrder = true, 
                     OrderDuration = new classOrderDuration() { DurationType = "GoodTillCancel"} };
