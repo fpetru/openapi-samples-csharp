@@ -361,3 +361,4 @@ FodyWeavers.xsd
 
 # Local settings
 authentication/Authentication_PKCE/Sample.Auth.Pkce/App.settings.txt
+authentication/Authentication_PKCE/Sample.Auth.Pkce/App.json.txt
